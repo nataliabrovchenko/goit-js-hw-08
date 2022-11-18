@@ -1,11 +1,31 @@
+import throttle from 'lodash.throttle';
+
+const STORAGE_KEY = `feedback-form-state`;
+
 const form = document.querySelector(`.feedback-form`);
-const input = document.querySelector(`.email message`);
+const textarea = document.querySelector(`.feedback-form textarea`);
 
 form.addEventListener(`submit`, onFormSubmit);
-input.addEventListener(`input`, onInput);
+textarea.addEventListener(`input`, throttle(onInput, 500));
+
+populateMessage();
+
+function onInput(event) {
+    const message = event.currentTarget.value;
+    localStorage.setItem(STORAGE_KEY, message);
+} 
 
 function onFormSubmit(event) {
     event.preventDefault();
-
-    console.log(`отправка`)
+    event.currentTarget.reset();
+    localStorage.removeItem(STORAGE_KEY);
 }
+
+function populateMessage() {
+    const savedMessage = localStorage.getItem(STORAGE_KEY);
+    
+    if(savedMessage) {
+        textarea.value = savedMessage;
+    }
+}
+
