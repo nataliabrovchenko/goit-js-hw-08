@@ -15,7 +15,7 @@ function onInput(event) {
     const email = form.email.value;
     const message = form.message.value;    
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ email, message }));    
-  }
+};
 
 function onLoad (event) {
     event.preventDefault();
@@ -24,7 +24,7 @@ function onLoad (event) {
     const {email, message} = dataForm;
     form.email.value = email;
     form.message.value = message;
-}
+};
 
 function onFormSubmit(event) {
     event.preventDefault();
@@ -32,11 +32,11 @@ function onFormSubmit(event) {
     console.log({email: email.value, message: message.value})
     event.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
-}
+};
 
 function populateMessage() {
     const savedMessage = localStorage.getItem(STORAGE_KEY);
     if(savedMessage) {
         form.value = savedMessage;
     }
-}
+};
