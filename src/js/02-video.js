@@ -1,10 +1,16 @@
 import Player from '@vimeo/player';
 
-const player = new Player('handstick', {
-    id: 19231868,
-    width: 640
-});
+import throttle from 'lodash.throttle';
 
-player.on('play', function() {
+const iframe = document.querySelector('iframe');
+const player = new Vimeo.Player(iframe);
+
+player.on('timeupdate', throttle(savedCurrentTimem, 1000));
+
+function savedCurrentTime(event) {
     console.log('played the video!');
+}
+
+player.getVideoTitle().then(function(title) {
+    console.log('title:', title);
 });
