@@ -40,4 +40,3 @@ function populateMessage() {
         form.value = savedMessage;
     }
 }
-
