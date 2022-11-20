@@ -18,10 +18,10 @@ function onInput(event) {
 function onLoad (event) {
     event.preventDefault();
     const savedData = localStorage.getItem(STORAGE_KEY);
-        savedDataForm = JSON.parse(savedData);
-        Object.entries(savedDataForm).forEach(([name, value]) => {
-          form.elements[name].value = value;
-        });
+    const savedDataParse = JSON.parse(savedData)||{email:"", message:""};
+    const { email, message } = savedDataParse;
+    form.elements.email.value = email;
+    form.elements.message.value = message;
 };
 
 function onFormSubmit(event) {
